@@ -1,16 +1,24 @@
-// Select all price elements
-const prices = document.querySelectorAll(".price");
-let total = 0;
-prices.forEach(price => {
-  total += Number(price.textContent);
+document.getElementById("calculate").addEventListener("click", function () {
+  const prices = document.querySelectorAll(".prices");
+  let total = 0;
+
+  prices.forEach(price => {
+    total += Number(price.textContent);
+  });
+
+  const table = document.querySelector("table");
+
+  // Prevent duplicate total rows
+  if (document.getElementById("total-row")) return;
+
+  const row = document.createElement("tr");
+  row.id = "total-row";
+
+  const cell = document.createElement("td");
+  cell.colSpan = 2;
+  cell.textContent = "Total Price = Rs " + total;
+
+  row.appendChild(cell);
+  table.appendChild(row);
 });
-const table = document.querySelector("table");
-const totalRow = document.createElement("tr");
 
-// Create single cell
-const totalCell = document.createElement("td");
-totalCell.colSpan = 2;
-totalCell.textContent = "Total Price = Rs " + total;
-totalRow.appendChild(totalCell);
-
-table.appendChild(totalRow);
