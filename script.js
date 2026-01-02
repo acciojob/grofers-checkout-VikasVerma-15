@@ -6,19 +6,23 @@ document.getElementById("calculate").addEventListener("click", function () {
     total += Number(price.textContent);
   });
 
+  // Show answer in #ans (MANDATORY)
+  document.getElementById("ans").textContent = "Total Price = Rs " + total;
+
+  // Also add a row to table (as problem statement says)
   const table = document.querySelector("table");
 
-  // Prevent duplicate total rows
-  if (document.getElementById("total-row")) return;
+  if (!document.getElementById("total-row")) {
+    const row = document.createElement("tr");
+    row.id = "total-row";
 
-  const row = document.createElement("tr");
-  row.id = "total-row";
+    const cell = document.createElement("td");
+    cell.colSpan = 2;
+    cell.textContent = "Total Price = Rs " + total;
 
-  const cell = document.createElement("td");
-  cell.colSpan = 2;
-  cell.textContent = "Total Price = Rs " + total;
-
-  row.appendChild(cell);
-  table.appendChild(row);
+    row.appendChild(cell);
+    table.appendChild(row);
+  }
 });
+
 
